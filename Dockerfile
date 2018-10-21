@@ -3,7 +3,7 @@ FROM ubuntu:latest
 ENV USERNAME ""
 ENV PASSWORD ""
 ENV HOME "/home/user/"
-
+ENV SSHPASS "yhiblog"
 
 ENV GOTTY_USER "yhiblog"
 ENV GOTTY_PASS "yhiblog"
