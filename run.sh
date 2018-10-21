@@ -29,4 +29,14 @@ export RCLONE_CONFIG=$HOME/config/rclone.conf
 EOF
 
 
+cat << EOF >> ~/.gotty
+preferences {
+copy_on_select = false
+use_default_window_copy = true
+clear_selection_after_copy = false
+ctrl_c_copy = true
+ctrl_v_paste = true
+}
+EOF
+
 gotty --port 8080 -c "${GOTTY_USER}:${GOTTY_PASS}" -w bash 
