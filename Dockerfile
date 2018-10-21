@@ -40,6 +40,7 @@ RUN echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers
 RUN chmod 0440 /etc/sudoers.d/user
 
 RUN chmod -R 777 $HOME
+RUN apt-get clean all
 
 COPY run.sh /tmp/
 ADD passwd_template /tmp/
