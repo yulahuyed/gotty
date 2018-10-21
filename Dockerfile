@@ -21,7 +21,7 @@ WORKDIR $HOME
 RUN mkdir -p $HOME/tool && chmod -R 777 $HOME/tool
 RUN curl -o rclone.zip -L `curl -L https://rclone.org/downloads/ | grep -E ".*linux.*amd64.zip" | head -n 1 | awk -F "href" '{print $2}' | awk -F '"' '{print $2}'`
 RUN unzip rclone.zip
-RUN mv ./rclone*/rclone ./tool/
+RUN mv ./rclone*/rclone $HOME/tool/
 RUN rm -rf rclone.zip rclone-*
 
 RUN mkdir -p $HOME/config && chmod -R 777 $HOME/config
@@ -31,6 +31,12 @@ RUN tar xzf go.tar.gz
 RUN rm -rf go.tar.gz
 RUN export GOPATH=$HOME/goproject && export PATH=$HOME/go/bin:$PATH:$GOPATH/bin && go get -u github.com/golang/dep/cmd/dep
 RUN export GOPATH=$HOME/goproject && export PATH=$HOME/go/bin:$PATH:$GOPATH/bin && go get github.com/yudai/gotty
+
+RUN curl -o oc.tar.gz -L `curl -L https://github.com/openshift/origin/releases | grep -E ".*client.*linux-64bit.tar.gz" | head -n 1 | awk -F "href" '{print $2}' | awk -F '"' '{print $2}'`
+RUN tar xzf oc.tar.gz
+RUN mv ./openshift*/oc $HOME/tool/
+RUN mv ./openshift*/kubectl $HOME/tool/
+RUN rm -rf oc.tar.gz openshift*
 
 RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash user
 RUN echo "user:$SSHPASS" | chpasswd
