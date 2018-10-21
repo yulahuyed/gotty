@@ -32,7 +32,7 @@ RUN rm -rf go.tar.gz
 RUN export GOPATH=$HOME/goproject && export PATH=$HOME/go/bin:$PATH:$GOPATH/bin && go get -u github.com/golang/dep/cmd/dep
 RUN export GOPATH=$HOME/goproject && export PATH=$HOME/go/bin:$PATH:$GOPATH/bin && go get github.com/yudai/gotty
 
-RUN curl -o oc.tar.gz -L `curl -L https://github.com/openshift/origin/releases | grep -E ".*client.*linux-64bit.tar.gz" | head -n 1 | awk -F "href" '{print $2}' | awk -F '"' '{print $2}'`
+RUN curl -o oc.tar.gz -L `curl -L https://github.com/openshift/origin/releases | grep -E ".*client.*linux-64bit.tar.gz" | head -n 1 | awk -F "href" '{print $2}' | awk -F '"' '{print https://github.com$2}'`
 RUN tar xzf oc.tar.gz
 RUN mv ./openshift*/oc $HOME/tool/
 RUN mv ./openshift*/kubectl $HOME/tool/
