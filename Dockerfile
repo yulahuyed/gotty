@@ -10,7 +10,7 @@ ENV GOTTY_PASS "yhiblog"
 
 RUN apt update && apt install -y build-essential python bash vim screen git net-tools \
 curl software-properties-common libnss-wrapper gettext-base sudo unzip wget ssh \
-man nmap apt-get install default-jdk axel aria2
+man nmap default-jdk axel aria2
 
 RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 
@@ -29,9 +29,8 @@ RUN mkdir -p $HOME/goproject && chmod -R 777 $HOME/goproject
 RUN curl -o go.tar.gz -L `curl -L "https://golang.org/dl/" | grep -E "dl.google.com.*linux-amd64.tar.gz" | head -n 1 | awk -F "href" '{print $2}' | awk -F '"' '{print $2}'`
 RUN tar xzf go.tar.gz
 RUN rm -rf go.tar.gz
-RUN export GOPATH=$HOME/goproject && export PATH=$HOME/go/bin:$PATH:$GOPATH/bin
-RUN go get -u github.com/golang/dep/cmd/dep
-RUN go get github.com/yudai/gotty
+RUN export GOPATH=$HOME/goproject && export PATH=$HOME/go/bin:$PATH:$GOPATH/bin && go get -u github.com/golang/dep/cmd/dep
+RUN export GOPATH=$HOME/goproject && export PATH=$HOME/go/bin:$PATH:$GOPATH/bin && go get github.com/yudai/gotty
 
 RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash user
 RUN echo "user:$SSHPASS" | chpasswd
