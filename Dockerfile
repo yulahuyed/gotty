@@ -10,7 +10,7 @@ ENV GOTTY_PASS "yhiblog"
 
 RUN apt update && apt install -y build-essential python bash vim screen git net-tools \
 curl software-properties-common libnss-wrapper gettext-base sudo unzip wget ssh \
-man nmap default-jdk axel aria2
+man nmap default-jdk axel aria2 ffmpeg
 
 RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 
@@ -38,7 +38,7 @@ RUN mv ./openshift*/oc $HOME/tool/
 RUN mv ./openshift*/kubectl $HOME/tool/
 RUN rm -rf oc.tar.gz openshift*
 
-RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash user
+RUN adduser --uid 1000 --gid 0 --disabled-password --gecos "" --no-create-home --shell /bin/bash user
 RUN echo "user:$SSHPASS" | chpasswd
 RUN echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers.d/user
 RUN echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers
